@@ -110,11 +110,30 @@ export default function HomePage() {
   const cardStyle = { background: "white", border: "1px solid #e7e9f0", borderRadius: 16, padding: 22, marginBottom: 18 };
 
   return (
-    <main style={{ minHeight: "100vh", background: "#f6f7fb", padding: "36px 20px", fontFamily: "Arial, sans-serif", color: "#172033" }}>
+    <main className="dashboard-shell" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #f8f9ff 0%, #f4f5fb 100%)", padding: "28px 24px", fontFamily: "Arial, sans-serif", color: "#172033", display: "flex", gap: 24, alignItems: "flex-start" }}>
+      <aside className="dashboard-sidebar" style={{ width: 230, minHeight: "calc(100vh - 56px)", background: "#17132d", color: "white", borderRadius: 22, padding: 22, position: "sticky", top: 28 }}>
+        <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.5 }}>Resumax<span style={{ color: "#a99cff" }}>AI</span></div>
+        <p style={{ color: "#aaa2c8", fontSize: 12, lineHeight: 1.5 }}>Your career copilot for stronger applications.</p>
+        <nav style={{ marginTop: 34, display: "grid", gap: 8 }}>
+          <div style={{ background: "#6556d8", borderRadius: 10, padding: "12px 13px", fontWeight: 700 }}>⌂ Dashboard</div>
+          <div style={{ color: "#c4bddb", padding: "12px 13px" }}>✦ Resume builder</div>
+          <div style={{ color: "#c4bddb", padding: "12px 13px" }}>◈ ATS analysis</div>
+          <div style={{ color: "#c4bddb", padding: "12px 13px" }}>⚙ Settings</div>
+        </nav>
+        <div style={{ marginTop: 80, borderTop: "1px solid #383052", paddingTop: 18, color: "#aaa2c8", fontSize: 12 }}>Demo mode<br /><span style={{ color: "#e5e1f5" }}>Saved in your browser</span></div>
+      </aside>
       <div style={{ maxWidth: 900, margin: "auto" }}>
-        <p style={{ color: "#6556d8", fontWeight: 700 }}>RESUME MAXIMIZER</p>
-        <h1 style={{ fontSize: 38, margin: "8px 0" }}>Build a resume recruiters notice.</h1>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 18, alignItems: "flex-start" }}>
+          <div><p style={{ color: "#6556d8", fontWeight: 700, letterSpacing: 1 }}>GOOD TO SEE YOU</p>
+          <h1 style={{ fontSize: 38, margin: "8px 0" }}>Build a resume recruiters notice.</h1></div>
+          <div style={{ background: "white", border: "1px solid #e7e9f0", borderRadius: 12, padding: "10px 14px", fontSize: 13, color: "#667085" }}>● Demo workspace</div>
+        </div>
         <p style={{ color: "#667085", marginBottom: 28 }}>Create your resume, compare it with a job, and improve your ATS score.</p>
+
+        <div style={{ ...cardStyle, display: "flex", gap: 16, alignItems: "center", background: "linear-gradient(110deg, #eeeaff, #ffffff)" }}>
+          <div style={{ width: 38, height: 38, borderRadius: 12, background: "#6556d8", color: "white", display: "grid", placeItems: "center", fontWeight: 800 }}>1</div>
+          <div><strong>Complete your resume profile</strong><div style={{ color: "#667085", fontSize: 13, marginTop: 4 }}>Add your experience, projects, and target job to unlock your ATS insights.</div></div>
+        </div>
 
         <form onSubmit={analyze}>
           <section style={cardStyle}>

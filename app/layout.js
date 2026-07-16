@@ -3,6 +3,8 @@ export const metadata = {
   description: "Backend services for an AI-assisted CS student resume builder"
 };
 
+import "./globals.css";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

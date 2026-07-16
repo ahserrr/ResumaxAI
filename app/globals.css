@@ -1,0 +1,7 @@
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, textarea, select { font: inherit; }
+@media (max-width: 760px) {
+  aside.dashboard-sidebar { display: none !important; }
+  main.dashboard-shell { padding: 22px 14px !important; }
+}
