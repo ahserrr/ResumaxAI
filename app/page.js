@@ -66,6 +66,16 @@ export default function HomePage() {
     setApprovedChanges((current) => current.includes(change) ? current : [...current, change]);
   }
 
+  function goTo(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function clearDraft() {
+    localStorage.removeItem("resume-maximizer-draft");
+    setResume(initialResume);
+    setResult(null);
+  }
+
   async function analyze(event) {
     event.preventDefault();
     setLoading(true);
@@ -115,10 +125,10 @@ export default function HomePage() {
         <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.5 }}>Resumax<span style={{ color: "#a99cff" }}>AI</span></div>
         <p style={{ color: "#aaa2c8", fontSize: 12, lineHeight: 1.5 }}>Your career copilot for stronger applications.</p>
         <nav style={{ marginTop: 34, display: "grid", gap: 8 }}>
-          <div style={{ background: "#6556d8", borderRadius: 10, padding: "12px 13px", fontWeight: 700 }}>⌂ Dashboard</div>
-          <div style={{ color: "#c4bddb", padding: "12px 13px" }}>✦ Resume builder</div>
-          <div style={{ color: "#c4bddb", padding: "12px 13px" }}>◈ ATS analysis</div>
-          <div style={{ color: "#c4bddb", padding: "12px 13px" }}>⚙ Settings</div>
+          <button type="button" onClick={() => goTo("dashboard-preview")} style={{ textAlign: "left", background: "#6556d8", color: "white", border: 0, borderRadius: 10, padding: "12px 13px", fontWeight: 700, cursor: "pointer" }}>⌂ Dashboard</button>
+          <button type="button" onClick={() => goTo("resume-builder")} style={{ textAlign: "left", color: "#c4bddb", background: "transparent", border: 0, padding: "12px 13px", cursor: "pointer" }}>✦ Resume builder</button>
+          <button type="button" onClick={() => goTo("analysis-results")} style={{ textAlign: "left", color: "#c4bddb", background: "transparent", border: 0, padding: "12px 13px", cursor: "pointer" }}>◈ ATS analysis</button>
+          <button type="button" onClick={() => goTo("settings")} style={{ textAlign: "left", color: "#c4bddb", background: "transparent", border: 0, padding: "12px 13px", cursor: "pointer" }}>⚙ Settings</button>
         </nav>
         <div style={{ marginTop: 80, borderTop: "1px solid #383052", paddingTop: 18, color: "#aaa2c8", fontSize: 12 }}>Demo mode<br /><span style={{ color: "#e5e1f5" }}>Saved in your browser</span></div>
       </aside>
@@ -135,7 +145,7 @@ export default function HomePage() {
           <div><strong>Complete your resume profile</strong><div style={{ color: "#667085", fontSize: 13, marginTop: 4 }}>Add your experience, projects, and target job to unlock your ATS insights.</div></div>
         </div>
 
-        <section style={{ ...cardStyle, background: "#fff", border: "1px solid #ded9ff" }}>
+        <section id="dashboard-preview" style={{ ...cardStyle, background: "#fff", border: "1px solid #ded9ff" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
             <div><p style={{ color: "#6556d8", fontWeight: 700, fontSize: 12, margin: 0 }}>LIVE PREVIEW</p><h2 style={{ margin: "5px 0 0" }}>Your resume canvas</h2></div>
             <div style={{ textAlign: "right" }}><div style={{ fontSize: 24, fontWeight: 800, color: result ? "#6556d8" : "#98a2b3" }}>{result ? `${result.score}/100` : "—"}</div><small style={{ color: "#667085" }}>ATS score</small></div>
@@ -151,7 +161,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <form onSubmit={analyze}>
+        <form id="resume-builder" onSubmit={analyze}>
           <section style={cardStyle}>
             <h2>Personal information</h2>
             <input style={inputStyle} placeholder="Full name" value={resume.contact.name} onChange={(e) => updateContact("name", e.target.value)} />
@@ -205,7 +215,7 @@ export default function HomePage() {
         {error && <p style={{ color: "#c0392b", marginTop: 18 }}>{error}</p>}
 
         {result && (
-          <section style={{ ...cardStyle, marginTop: 24 }}>
+          <section id="analysis-results" style={{ ...cardStyle, marginTop: 24 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
               <div style={{ width: 92, height: 92, borderRadius: "50%", background: "#eeeaff", display: "grid", placeItems: "center", color: "#6556d8", fontSize: 24, fontWeight: 800 }}>{result.score}</div>
               <div><h2 style={{ margin: 0 }}>ATS score / 100</h2><p style={{ color: "#667085" }}>Higher scores usually mean stronger alignment with the job description.</p></div>
@@ -233,6 +243,12 @@ export default function HomePage() {
             <button onClick={downloadPdf} style={{ marginTop: 12, background: "#172033", color: "white", border: 0, borderRadius: 10, padding: "12px 18px", cursor: "pointer" }}>Download PDF</button>
           </section>
         )}
+
+        <section id="settings" style={{ ...cardStyle, marginTop: 24 }}>
+          <h2>Settings</h2>
+          <p style={{ color: "#667085" }}>Your demo resume is saved only in this browser.</p>
+          <button type="button" onClick={clearDraft} style={{ border: "1px solid #d92d20", color: "#d92d20", background: "white", borderRadius: 8, padding: "10px 14px", cursor: "pointer" }}>Clear saved draft</button>
+        </section>
       </div>
     </main>
   );
