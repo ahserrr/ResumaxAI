@@ -135,6 +135,22 @@ export default function HomePage() {
           <div><strong>Complete your resume profile</strong><div style={{ color: "#667085", fontSize: 13, marginTop: 4 }}>Add your experience, projects, and target job to unlock your ATS insights.</div></div>
         </div>
 
+        <section style={{ ...cardStyle, background: "#fff", border: "1px solid #ded9ff" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+            <div><p style={{ color: "#6556d8", fontWeight: 700, fontSize: 12, margin: 0 }}>LIVE PREVIEW</p><h2 style={{ margin: "5px 0 0" }}>Your resume canvas</h2></div>
+            <div style={{ textAlign: "right" }}><div style={{ fontSize: 24, fontWeight: 800, color: result ? "#6556d8" : "#98a2b3" }}>{result ? `${result.score}/100` : "—"}</div><small style={{ color: "#667085" }}>ATS score</small></div>
+          </div>
+          <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 22, background: "#fff", minHeight: 230 }}>
+            <h2 style={{ margin: 0, color: "#172033" }}>{resume.contact.name || "Your Name"}</h2>
+            <p style={{ color: "#667085", fontSize: 12 }}>{[resume.contact.email, resume.contact.phone, resume.contact.linkedin, resume.contact.github].filter(Boolean).join("  •  ") || "email • phone • LinkedIn • GitHub"}</p>
+            {resume.education && <><h4>EDUCATION</h4><p style={{ whiteSpace: "pre-wrap" }}>{resume.education}</p></>}
+            {resume.skills && <><h4>SKILLS</h4><p>{resume.skills}</p></>}
+            {resume.projects && <><h4>PROJECTS</h4><p style={{ whiteSpace: "pre-wrap" }}>{resume.projects}</p></>}
+            {resume.experience && <><h4>EXPERIENCE</h4><p style={{ whiteSpace: "pre-wrap" }}>{resume.experience}</p></>}
+            {!resume.education && !resume.skills && !resume.projects && !resume.experience && <p style={{ color: "#98a2b3", textAlign: "center", padding: 35 }}>Start filling in your resume to see a live preview.</p>}
+          </div>
+        </section>
+
         <form onSubmit={analyze}>
           <section style={cardStyle}>
             <h2>Personal information</h2>
